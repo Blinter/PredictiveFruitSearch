@@ -28,13 +28,14 @@ function showSuggestions(results) {
 			input.value = e.target.getAttribute("data-label");
 		});
 		ele1.addEventListener("mouseout", e => {
-			input.className = "";
 			input.value = input.getAttribute("data-previous");
+			input.removeAttribute("class");
+			input.removeAttribute("data-previous");
 		});
-		suggestions.append(ele1);
 		suggestions.append(ele1);
 	});
 }
+
 function showSuggestionsAndScore(results) {
 	const maximum = results.reduce((a, v) => Math.max(a, v[1]), -Infinity);
 	results.forEach((v, i) => {
@@ -92,7 +93,6 @@ function sortRelevance(str, resultsAmount = 0) {
 	}, new Map())).sort((a, b) => {
 		return b[1] - a[1];
 	}).slice(0, resultsAmount);
-
 	return relevance.checked ? _results : _results.map(v => v[0]);
 }
 
